@@ -1,5 +1,4 @@
 const refs = {
-  myTimerId: document.querySelector("#timer-1"),
   daysEl: document.querySelector('#timer-1 .value[data-value="days"]'),
   hoursEl: document.querySelector('#timer-1 .value[data-value="hours"]'),
   minsEl: document.querySelector('#timer-1 .value[data-value="mins"]'),
@@ -21,8 +20,7 @@ class CountdownTimer {
 
     this.intervalId = setInterval(() => {
       const currentTime = Date.now();
-      const time = currentTime - startTime;
-      // const timeComponents = this.getTimeComponents(deltaTime);
+      const time = startTime - currentTime;
 
       const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
       const hours = this.pad(
@@ -37,20 +35,8 @@ class CountdownTimer {
       refs.hoursEl.innerHTML = hours;
       refs.minsEl.innerHTML = mins;
       refs.secsEl.innerHTML = secs;
-
-      //   this.onTick(timeComponents);
     }, PROM_DALEY);
   }
-
-  //   getTimeComponents(time) {
-  //     const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
-  //     const hours = this.pad(
-  //       Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-  //     );
-  //     const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
-  //     const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
-  //     return { days, hours, mins, secs };
-  //   }
 
   pad(value) {
     return String(value).padStart(2, "0");
@@ -59,12 +45,7 @@ class CountdownTimer {
 
 const timer = new CountdownTimer({
   selector: "#timer-1",
-  targetDate: new Date("Jul 17, 2019"),
-  //   onTick: updateClockface,
+  targetDate: new Date("Jul 17, 2021"),
 });
 
 timer.start();
-
-// function updateClockface({ days, hours, mins, secs }) {
-//   refs.myTimerId.textContent = `${days}:${hours}:${mins}:${secs}`;
-// }
