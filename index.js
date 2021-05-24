@@ -8,9 +8,8 @@ const refs = {
 const PROM_DALEY = 1000;
 
 class CountdownTimer {
-  constructor({ onTick, selector, targetDate }) {
+  constructor({ selector, targetDate }) {
     this.intervalId = null;
-    this.onTick = onTick;
     this.selector = selector;
     this.targetDate = targetDate;
   }
@@ -31,10 +30,10 @@ class CountdownTimer {
       );
       const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
 
-      refs.daysEl.innerHTML = days;
-      refs.hoursEl.innerHTML = hours;
-      refs.minsEl.innerHTML = mins;
-      refs.secsEl.innerHTML = secs;
+      this.selector.daysEl.innerHTML = days;
+      this.selector.hoursEl.innerHTML = hours;
+      this.selector.minsEl.innerHTML = mins;
+      this.selector.secsEl.innerHTML = secs;
     }, PROM_DALEY);
   }
 
@@ -44,7 +43,7 @@ class CountdownTimer {
 }
 
 const timer = new CountdownTimer({
-  selector: "#timer-1",
+  selector: refs,
   targetDate: new Date("Jul 17, 2021"),
 });
 
